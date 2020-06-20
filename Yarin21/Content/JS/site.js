@@ -120,7 +120,7 @@ function Submit() {
         async: true,
         data: { fname: name, description: desc, email: e_mail, phone: tel },
         success: function (data) {
-            alert(data);
+            alert("הודעת אימייל נשלחה בהצלחה");
         }
     });
 
