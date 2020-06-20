@@ -54,19 +54,19 @@ function inputRequierd(myInput, errMsg) {
     }
 }
 
-var number6;
+var number7;
 function inputPhoneRequierd(myInput, errMsg) {
     const len = document.getElementById(myInput.id).value.length;
-    if (len < 8) {
+    if (len < 7) {
         addError(myInput, errMsg);
     } else {
         removeError(myInput, errMsg);
     }
     if (len == 7) {
-        number6 = myInput.value;
+        number7 = myInput.value;
     }
-    if (len >= 8) {
-        myInput.value = number6;
+    if (len > 7) {
+        myInput.value = number7;
         removeError(myInput, errMsg);
     }
 }
@@ -99,9 +99,30 @@ function inputValidity(myInput, errMsg) {
 
 function Submit() {
     const name = document.getElementById("fname").value;
-    const description = document.getElementById("description").value;
-    const email = document.getElementById("email").value;
-    const phone = "" + document.getElementById("tel").value
+    const desc = document.getElementById("description").value;
+    const e_mail = document.getElementById("email").value;
+    const tel = +(document.getElementById("areaCode").value + "" + document.getElementById("tel").value);
+    
+    var result = name + "|" + desc + "|" + e_mail + "|" + tel;
+    console.log(name + "|" + desc + "|" + e_mail + "|" + tel);
+    document.getElementById("result").innerText = result;
+    var frmData = $('#myForm').serialize();
+    //$.post("SendEmail", frmData, function (data)
+    //{
+    //        alert(data);
+    //});
+    console.log(frmData);
 
-    console.log(name + "|" + description + "|" + email + "|" + phone);
+
+    $.ajax({
+        url: "/Home/SendEmail",
+        type: 'POST',
+        async: true,
+        data: { fname: name, description: desc, email: e_mail, phone: tel },
+        success: function (data) {
+            alert(data);
+        }
+    });
+
+    
 }

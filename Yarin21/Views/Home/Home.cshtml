@@ -16,7 +16,6 @@
     <script src="~/Content/Bootstrap/popper.min.js"></script>
     <link href="~/Content/CSS/site.css" rel="stylesheet" />
 
-    
 </head>
 <body>
 
@@ -36,7 +35,8 @@
 
             </div>
             <div class="col-lg-2">
-                <form onsubmit="Submit()" id="myForm" method="post" enctype="text/plain" class="myForm">
+
+                <form id="myForm" enctype="text/plain" class="myForm">
                     <h1>שליחת הזמנה</h1>
                     <div class="row">
                         <div class="col-md-12" style="text-align:right;">
@@ -91,12 +91,13 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- <input type="Submit" value="שלח" >
-                    <button type="submit">שלח <i class='far fa-envelope-open'></i></button> -->
+                            <button type="submit">שלח <i class='far fa-envelope-open'></i></button> -->
                             <button style="width: 100%;" onclick="Submit()" type="button" class="btn btn-primary">שלח <i class='far fa-envelope-open'></i></button>
                         </div>
                     </div>
 
                 </form>
+
             </div>
 
         </div>
@@ -146,10 +147,12 @@
                 </div>
             </div>
         </div>
+        <p id="result">Result</p>
     </div>
 
-    <script src="~/Content/JS/site.js"></script>
 
+    <script src="~/Content/JS/site.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
 </body>
