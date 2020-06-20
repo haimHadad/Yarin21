@@ -1,0 +1,158 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yarin Sweets</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/Jquery/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Content/Bootstrap/popper.min.js"></script>
+    <link href="~/Content/CSS/site.css" rel="stylesheet" />
+
+    
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="background-color: rgb(255, 224, 255); ">
+            <!-- background-color: rgb(255, 224, 255); -->
+            <div class="col-lg-10">
+                <div class="Title" style="padding-left:20%">
+                    <h1 style="font-family:Brush Script MT;font-size:70px">Yarin Sweets</h1>
+
+                    <img style="width: 60%;" src="~/Content/img/logo.jpg">
+                    <p class="summary" style="font-family:'Gan CLM'; font-size: 30px">עוגות מוס, זילוף, קינוחים אישיים ועוד הרבה</p>
+                    <p class="summary" style="font-family:'Gan CLM';font-size:30px">WattsApp-לפרטים: 052-3249977 ב</p>
+                    <!-- Container for the image gallery -->
+
+                </div>
+
+            </div>
+            <div class="col-lg-2">
+                <form onsubmit="Submit()" id="myForm" method="post" enctype="text/plain" class="myForm">
+                    <h1>שליחת הזמנה</h1>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:right;">
+                            <label for="fname" style=" font-family:Dishonorable Mention (Comic Sans) MT;font-size:30px;">:שם</label>
+                            <input dir="rtl" onkeyup="inputValidity(fname,errName)" class="" required placeholder="הכנס/י את שימך" type="text" id="fname" name="fname">
+                            <small style="display: none;" id="errName">שם לא תקין*</small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:right;">
+                            <label for="desc" style="font-family:Dishonorable Mention (Comic Sans) MT;font-size:30px">:תיאור</label>
+                            @*<input dir="rtl" onkeyup="inputValidity(lname,errDec)" required placeholder="הכנס/י את תיאור ההזמנה" type="text" id="desc" name="lname">*@
+                            <textarea required dir="rtl" maxlength="50" onkeyup="inputValidity(description,errDec)" placeholder="הכנס/י את תיאור ההזמנה" type="text" id="description" name="description"></textarea>
+                            <small style="display: none;" id="errDec">תיאור לא תקין*</small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:right;">
+                            <label for="lname" style="font-family:Dishonorable Mention (Comic Sans) MT;font-size:30px">:דואר אלקטרוני</label>
+                            <input dir="rtl" onkeyup="inputValidity(email,errMail)" required placeholder="הכנס/י דואר אלקטרוני" type="email" id="email" name="email">
+                            <small style="display: none;" id="errMail">דוא"ל לא תקין*</small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:right;">
+                            <label for="lname" style="font-family:Dishonorable Mention (Comic Sans) MT;font-size:30px">:פלאפון</label>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <select name="areaCode" id="areaCode">
+                                        <option value="050">050</option>
+                                        <option value="052">052</option>
+                                        <option value="053">053</option>
+                                        <option value="054">054</option>
+                                        <option value="055">055</option>
+                                        <option value="057">057</option>
+                                        <option value="058">058</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <input dir="rtl" onkeyup="inputValidity(tel,errPhone)" required minlength="7" maxlength="7" placeholder="מס טלפון" type="number" id="tel" name="phone">
+                                </div>
+                            </div>
+
+                            <small style="display: none;" id="errPhone">טלפון לא תקין*</small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <input type="Submit" value="שלח" >
+                    <button type="submit">שלח <i class='far fa-envelope-open'></i></button> -->
+                            <button style="width: 100%;" onclick="Submit()" type="button" class="btn btn-primary">שלח <i class='far fa-envelope-open'></i></button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-8">
+                <hr />
+                <div class="container">
+
+                    <img id="mainImg" src="~/Content/img/cake1.jpg" style="max-width: 50%; height: auto;">
+
+
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(-1)">&#10095;</a>
+                    <hr />
+                    <!-- Image text -->
+                    <div class="caption-container">
+                        <p style="font-family:Segoe UI" id="caption"></p>
+                    </div>
+
+                    <!-- Thumbnail images -->
+
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake1.jpg" id="img1" onmouseenter="currentSlide(1)" onclick="currentSlide(1)" alt="מוס טריקולד היסטריייייייי">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake2.jpg" id="img2" onmouseenter="currentSlide(2)" onclick="currentSlide(2)" alt="טורט שוקולד עם שכבות של קרם שוקולד מריר ואוראו🤩🤩🤩 (קוטר 26)">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake3.jpg" id="img3" onmouseenter="currentSlide(3)" onclick="currentSlide(3)" alt="טורט שוקולד ,שכבות של קרם שוקולד מריר ואוראו,קרם לוטוס עם שברי לוטוס,קרם שוקולד עם אגוזים! (פרווה)">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake4.jpg" id="img4" onmouseenter="currentSlide(4)" onclick="currentSlide(4)" alt="טורט שוקולד עם שכבות של קרם קינדר בואנו, מלא קינדרים, וקרם פררו רושה עם מלא פררו וקליקים">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake5.jpg" id="img5" onmouseenter="currentSlide(5)" onclick="currentSlide(5)" alt="שכבות טורט עם קרם שוקולד מריר,שברי אוראו, קרם לוטוס ושברי עוגיות לוטוס,קרם וניל עם פצפוצי שוקולד וסוכריות. (פרווה)">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor imgHover" src="~/Content/img/cake6.jpg" id="img6" onmouseenter="currentSlide(6)" onclick="currentSlide(6)" alt="תחתית קראנץ שוקולד, מוס פררו רושה עם מלא שוקולדים, מוס קינדר בואנו ומלא קינדרים, גאנש שוקולד חלב ואיך לא? פררו וקינדר לקישוט">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/JS/site.js"></script>
+
+
+
+</body>
+
+
+</html >
