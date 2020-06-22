@@ -27,7 +27,7 @@ namespace Yarin21.Controllers
             var txtPassword = "qwer1234@";
             var fromAddress = new MailAddress(mailFrom, senderName);
             var toAddrress = new MailAddress(mailTo, senderName);
-            var messageContent = "הזמנה חדשה עבור " + o.fname;
+            var messageContent = "הזמנה חדשה עבור " + o.fname +" מספר הטלפון הוא: 0"+o.phone;
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -47,17 +47,18 @@ namespace Yarin21.Controllers
                 smtp.Send(message);
             }
 
-            //var client = new Client(creds: new Nexmo.Api.Request.Credentials
-            //{
-            //    ApiKey = "c53cc48e",
-            //    ApiSecret = "PkDPfik6CSWFUUeK"
-            //});
-            //var results = client.SMS.Send(request: new SMS.SMSRequest
-            //{
-            //    from = "Yarin Tal",
-            //    to = "972559994147",
-            //    text = "We sent you an invitation to your Email"
-            //});
+            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "c53cc48e",
+                ApiSecret = "PkDPfik6CSWFUUeK"
+            });
+            var results = client.SMS.Send(request: new SMS.SMSRequest
+            {
+                from = "Yarin Tal",
+                to = "972"+o.phone,
+                text = "הזמנה מירין טל נשלחה לאימייל",
+                type = "unicode"
+            });
 
             return true;
         }
