@@ -37,6 +37,7 @@ function showSlides(n) {
 function addError(myInput, errMsg) {
     document.getElementById(myInput.id).style.border = "2px solid red";
     document.getElementById(errMsg.id).style.display = "block";
+
 }
 
 function removeError(myInput, errMsg) {
@@ -97,13 +98,28 @@ function inputValidity(myInput, errMsg) {
 
 }
 
+//function ErrorForm() {
+//    const errName = document.getElementById("errName").style.display == "block";
+//    const errDec = document.getElementById("errDec").style.display == "block";
+//    const errMail = document.getElementById("errMail").style.display == "block";
+//    const errPhone = document.getElementById("errPhone").style.display == "block";
+//    console.log("status--->" + errName + "" + errDec + "" + errMail + "" + errPhone);
+//    if (errName || errDec || errMail || errPhone) {
+//        return true;
+//    }
+
+//    return false;
+//}
+
 function Submit() {
     const name = document.getElementById("fname").value;
     const desc = document.getElementById("description").value;
     const e_mail = document.getElementById("email").value;
     const tel = +(document.getElementById("areaCode").value + "" + document.getElementById("tel").value);
-    var frmData = $('#myForm').serialize();
 
+ 
+    document.getElementById("submitBtn").style.display = "none";
+    document.getElementById("loader").style.display = "block";
     $.ajax({
         url: "/Home/SendEmail",
         type: 'POST',
@@ -111,8 +127,17 @@ function Submit() {
         data: { fname: name, description: desc, email: e_mail, phone: tel },
         success: function (data) {
             $('#EmailDialogBox').modal("show");
+            document.getElementById("submitBtn").style.display = "block";
+            document.getElementById("loader").style.display = "none";
+            $("#myForm").trigger('reset');
         }
     });
 
     
 }
+
+$("#myForm").submit(function (e) {
+    e.preventDefault();
+    Submit();
+
+});
