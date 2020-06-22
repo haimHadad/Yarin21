@@ -163,8 +163,9 @@ img {
 
 
 body {
-    background: rgb(244, 245, 226) !important;
+    
 }
+/*background: rgb(255, 224, 255) !important;   */
 
 .imgHover:hover {
     border-bottom: 3px solid rgb(72, 22, 255);

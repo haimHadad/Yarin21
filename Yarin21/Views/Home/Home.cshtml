@@ -15,7 +15,6 @@
     <script src="~/Content/Jquery/jquery-3.5.1.slim.min.js"></script>
     <script src="~/Content/Bootstrap/popper.min.js"></script>
     <link href="~/Content/CSS/site.css" rel="stylesheet" />
-
 </head>
 <body>
 
@@ -102,7 +101,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row" style="background-color:rgb(216,191,216)">
             <div class="col-lg-2"></div>
 
             <div class="col-lg-8">
@@ -147,12 +146,33 @@
                 </div>
             </div>
         </div>
-        <p id="result">Result</p>
+    </div>
+
+    <div class="modal fade" id="EmailDialogBox" tabindex="-1" role="dialog" aria-labelledby="EmailDialogBox" aria-hidden="true" style="">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="float:left">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <h4 class="modal-title">שליחת דואר אלקטרוני</h4>
+                </div>
+                <div class="modal-body" id="dialogBox_body" style="text-align:right">
+                    <p style="font-family:Segoe UI">!ההזמנה נשלחה בהצלחה</p>
+                </div>
+                <div  class="modal-footer" dir="rtl">
+                    <button dir="ltr" type="button" class="btn btn-danger" data-dismiss="modal">סגור<i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
-    <script src="~/Content/JS/site.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/JS/site.js"></script>
 
 
 </body>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Yarin21.Models;
-using System;
 using System.Net;
 using System.Net.Mail;
+using Nexmo.Api;
 
 namespace Yarin21.Controllers
 {
@@ -46,6 +46,19 @@ namespace Yarin21.Controllers
             {
                 smtp.Send(message);
             }
+
+            //var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            //{
+            //    ApiKey = "c53cc48e",
+            //    ApiSecret = "PkDPfik6CSWFUUeK"
+            //});
+            //var results = client.SMS.Send(request: new SMS.SMSRequest
+            //{
+            //    from = "Yarin Tal",
+            //    to = "972559994147",
+            //    text = "We sent you an invitation to your Email"
+            //});
+
             return true;
         }
     }

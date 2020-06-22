@@ -102,17 +102,7 @@ function Submit() {
     const desc = document.getElementById("description").value;
     const e_mail = document.getElementById("email").value;
     const tel = +(document.getElementById("areaCode").value + "" + document.getElementById("tel").value);
-    
-    var result = name + "|" + desc + "|" + e_mail + "|" + tel;
-    console.log(name + "|" + desc + "|" + e_mail + "|" + tel);
-    document.getElementById("result").innerText = result;
     var frmData = $('#myForm').serialize();
-    //$.post("SendEmail", frmData, function (data)
-    //{
-    //        alert(data);
-    //});
-    console.log(frmData);
-
 
     $.ajax({
         url: "/Home/SendEmail",
@@ -120,7 +110,7 @@ function Submit() {
         async: true,
         data: { fname: name, description: desc, email: e_mail, phone: tel },
         success: function (data) {
-            alert("הודעת אימייל נשלחה בהצלחה");
+            $('#EmailDialogBox').modal("show");
         }
     });
 
