@@ -37,12 +37,14 @@ function showSlides(n) {
 function addError(myInput, errMsg) {
     document.getElementById(myInput.id).style.border = "2px solid red";
     document.getElementById(errMsg.id).style.display = "block";
+    errorFormCnt = errorFormCnt + 1;
 
 }
 
 function removeError(myInput, errMsg) {
     document.getElementById(myInput.id).style.border = "";
     document.getElementById(errMsg.id).style.display = "none";
+    errorFormCnt = errorFormCnt - 1;
 }
 
 
@@ -54,7 +56,7 @@ function inputRequierd(myInput, errMsg) {
         removeError(myInput, errMsg);
     }
 }
-
+//submitBtn
 var number7;
 function inputPhoneRequierd(myInput, errMsg) {
     const len = document.getElementById(myInput.id).value.length;
@@ -85,6 +87,7 @@ function inputEmailRequierd(myInput, errMsg) {
 
 }
 
+var errorFormCnt = 0;
 
 function inputValidity(myInput, errMsg) {
     inputRequierd(myInput, errMsg);
@@ -95,6 +98,7 @@ function inputValidity(myInput, errMsg) {
     if (myInput.type === "email") {
         inputEmailRequierd(myInput, errMsg);
     }
+
 
 }
 
@@ -130,6 +134,11 @@ function Submit() {
             document.getElementById("submitBtn").style.display = "block";
             document.getElementById("loader").style.display = "none";
             $("#myForm").trigger('reset');
+        }, error: function (xhr, textStatus, errorThrown) {
+            var dom_nodes = $($.parseHTML(xhr.responseText));
+            alert(dom_nodes.filter('title').text());
+            document.getElementById("submitBtn").style.display = "block";
+            document.getElementById("loader").style.display = "none";
         }
     });
 
