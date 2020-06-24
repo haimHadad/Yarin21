@@ -38,16 +38,16 @@ namespace Yarin21.Controllers
                 Timeout = 20000
             };
 
-                using (var message = new MailMessage(fromAddress, toAddrress)
-                {
-                    Subject = messageContent,
-                    Body = o.description
-                })
-                {
-                    smtp.Send(message);
-                }
-
+            using (var message = new MailMessage(fromAddress, toAddrress)
+            {
+                Subject = messageContent,
+                Body = o.description
+            })
+            try{
+                smtp.Send(message);
             }
+
+            
             catch (FormatException)
             {
                 throw new Exception("כתובת דוא''ל אינה תקינה");
