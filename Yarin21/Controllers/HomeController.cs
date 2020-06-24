@@ -25,6 +25,10 @@ namespace Yarin21.Controllers
             var senderName = "ירין טל";
             string mailTo = o.email;
             string phoneNum = "0" + o.phone;
+            if (phoneNum.Length != 10)
+            {
+                throw new Exception("מס' פלאפון אינו תקין");
+            }
             if (!mailTo.Contains("."))
             {
                 throw new Exception("כתובת דוא''ל אינה תקינה");
@@ -33,6 +37,28 @@ namespace Yarin21.Controllers
             try
             {
                 MailAddress m = new MailAddress(o.email);
+                var txtPassword = "qwer1234@";
+                var fromAddress = new MailAddress(mailFrom, senderName);
+                var toAddrress = new MailAddress(mailTo, senderName);
+                var messageContent = "הזמנה חדשה עבור " + o.fname + " מספר הטלפון הוא: 0" + o.phone;
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    Credentials = new NetworkCredential(fromAddress.Address, txtPassword),
+                    Timeout = 20000
+                };
+
+                using (var message = new MailMessage(fromAddress, toAddrress)
+                {
+                    Subject = messageContent,
+                    Body = o.description
+                })
+                {
+                    smtp.Send(message);
+                }
 
             }
             catch (FormatException)
@@ -40,32 +66,8 @@ namespace Yarin21.Controllers
                 throw new Exception("כתובת דוא''ל אינה תקינה");
             }
 
-            if (phoneNum.Length != 10)
-            {
-                throw new Exception("מס' פלאפון אינו תקין");
-            }
-            var txtPassword = "qwer1234@";
-            var fromAddress = new MailAddress(mailFrom, senderName);
-            var toAddrress = new MailAddress(mailTo, senderName);
-            var messageContent = "הזמנה חדשה עבור " + o.fname +" מספר הטלפון הוא: 0"+o.phone;
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential(fromAddress.Address, txtPassword),
-                Timeout = 20000
-            };
-
-            using (var message = new MailMessage(fromAddress, toAddrress)
-            {
-                Subject = messageContent,
-                Body = o.description
-            })
-            {
-                smtp.Send(message);
-            }
+            
+            
             try
             {
                 var client = new Client(creds: new Nexmo.Api.Request.Credentials
