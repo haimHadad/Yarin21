@@ -66,19 +66,28 @@ namespace Yarin21.Controllers
             {
                 smtp.Send(message);
             }
+            try
+            {
+                var client = new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = "c53cc48e",
+                    ApiSecret = "PkDPfik6CSWFUUeK"
+                });
+                var results = client.SMS.Send(request: new SMS.SMSRequest
+                {
+                    from = "Yarin Tal",
+                    to = "972" + o.phone,
+                    text = "הזמנה מירין טל נשלחה לאימייל",
+                    type = "unicode"
+                });
 
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            }
+
+            catch(Exception)
             {
-                ApiKey = "c53cc48e",
-                ApiSecret = "PkDPfik6CSWFUUeK"
-            });
-            var results = client.SMS.Send(request: new SMS.SMSRequest
-            {
-                from = "Yarin Tal",
-                to = "972"+o.phone,
-                text = "הזמנה מירין טל נשלחה לאימייל",
-                type = "unicode"
-            });
+                throw new Exception("מס' פלאפון אינו תקין");
+            }
+            
 
             return true;
         }
