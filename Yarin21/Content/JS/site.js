@@ -130,6 +130,11 @@ function Submit() {
             document.getElementById("submitBtn").style.display = "block";
             document.getElementById("loader").style.display = "none";
             $("#myForm").trigger('reset');
+        }, error: function (xhr, textStatus, errorThrown) {
+            var dom_nodes = $($.parseHTML(xhr.responseText));
+            alert(dom_nodes.filter('title').text());
+            document.getElementById("submitBtn").style.display = "block";
+            document.getElementById("loader").style.display = "none";
         }
     });
 

@@ -20,10 +20,30 @@ namespace Yarin21.Controllers
 
         [HttpPost]
         public bool SendEmail(Order o)
-        {
+        {     
             var mailFrom = "96yarin.t@gmail.com";
             var senderName = "ירין טל";
-            var mailTo = o.email;
+            string mailTo = o.email;
+            string phoneNum = "0" + o.phone;
+            if (!mailTo.Contains("."))
+            {
+                throw new Exception("כתובת דוא''ל אינה תקינה");
+            }
+
+            try
+            {
+                MailAddress m = new MailAddress(o.email);
+
+            }
+            catch (FormatException)
+            {
+                throw new Exception("כתובת דוא''ל אינה תקינה");
+            }
+
+            if (phoneNum.Length != 10)
+            {
+                throw new Exception("מס' פלאפון אינו תקין");
+            }
             var txtPassword = "qwer1234@";
             var fromAddress = new MailAddress(mailFrom, senderName);
             var toAddrress = new MailAddress(mailTo, senderName);
