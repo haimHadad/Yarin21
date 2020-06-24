@@ -20,31 +20,10 @@ namespace Yarin21.Controllers
 
         [HttpPost]
         public bool SendEmail(Order o)
-        {
+        {     
             var mailFrom = "96yarin.t@gmail.com";
             var senderName = "ירין טל";
-            string mailTo = o.email;
-            string phoneNum = "0"+o.phone;
-            if (!mailTo.Contains("."))
-            {
-                throw new Exception("אימייל לא תקין");
-            }
-
-            try
-            {
-                MailAddress m = new MailAddress(o.email);
-            }
-            catch (FormatException)
-            {
-                throw new Exception("כתובת דוא''ל אינה תקינה");
-            }
-
-            if(phoneNum.Length != 10)
-            {
-                throw new Exception("מס' פלאפון אינו תקין");
-            }
-
-
+            var mailTo = o.email;
             var txtPassword = "qwer1234@";
             var fromAddress = new MailAddress(mailFrom, senderName);
             var toAddrress = new MailAddress(mailTo, senderName);
@@ -59,27 +38,45 @@ namespace Yarin21.Controllers
                 Timeout = 20000
             };
 
-            using (var message = new MailMessage(fromAddress, toAddrress)
+                using (var message = new MailMessage(fromAddress, toAddrress)
+                {
+                    Subject = messageContent,
+                    Body = o.description
+                })
+                {
+                    smtp.Send(message);
+                }
+
+            }
+            catch (FormatException)
             {
-                Subject = messageContent,
-                Body = o.description
-            })
-            {
-                smtp.Send(message);
+                throw new Exception("כתובת דוא''ל אינה תקינה");
             }
 
-            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            
+            
+            try
             {
-                ApiKey = "c53cc48e",
-                ApiSecret = "PkDPfik6CSWFUUeK"
-            });
-            var results = client.SMS.Send(request: new SMS.SMSRequest
+                var client = new Client(creds: new Nexmo.Api.Request.Credentials
+                {
+                    ApiKey = "c53cc48e",
+                    ApiSecret = "PkDPfik6CSWFUUeK"
+                });
+                var results = client.SMS.Send(request: new SMS.SMSRequest
+                {
+                    from = "Yarin Tal",
+                    to = "972" + o.phone,
+                    text = "הזמנה מירין טל נשלחה לאימייל",
+                    type = "unicode"
+                });
+
+            }
+
+            catch(Exception)
             {
-                from = "Yarin Tal",
-                to = "972"+o.phone,
-                text = "הזמנה מירין טל נשלחה לאימייל",
-                type = "unicode"
-            });
+                throw new Exception("מס' פלאפון אינו תקין");
+            }
+            
 
             return true;
         }
