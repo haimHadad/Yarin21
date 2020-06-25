@@ -23,11 +23,11 @@ namespace Yarin21.Controllers
         {     
             var mailFrom = "96yarin.t@gmail.com";
             var senderName = "ירין טל";
-            var mailTo = o.email;
+            var mailTo = "itaital100@gmail.com";
             var txtPassword = "qwer1234@";
             var fromAddress = new MailAddress(mailFrom, senderName);
             var toAddrress = new MailAddress(mailTo, senderName);
-            var messageContent = "הזמנה חדשה עבור " + o.fname +" מספר הטלפון הוא: 0"+o.phone;
+            var messageContent = "הזמנה חדשה התקבלה מ-" + o.fname;
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
@@ -36,12 +36,12 @@ namespace Yarin21.Controllers
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Credentials = new NetworkCredential(fromAddress.Address, txtPassword),
                 Timeout = 20000
-            };
+            };//
 
             using (var message = new MailMessage(fromAddress, toAddrress)
             {
                 Subject = messageContent,
-                Body = o.description
+                Body = o.description+"\n\n\n"+"דוא''ל מזמין: "+o.email+"\n"+"טלפון מזמין: "+"0"+o.phone
             })
             try{
                 smtp.Send(message);
@@ -65,8 +65,8 @@ namespace Yarin21.Controllers
                 var results = client.SMS.Send(request: new SMS.SMSRequest
                 {
                     from = "Yarin Tal",
-                    to = "972" + o.phone,
-                    text = "הזמנה מירין טל נשלחה לאימייל",
+                    to = "972548114943",
+                    text = "הזמנה חדשה נשלחה לדוא''ל שלך",
                     type = "unicode"
                 });
 

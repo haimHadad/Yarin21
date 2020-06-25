@@ -351,7 +351,7 @@
     <Content Include="Content\Bootstrap\bootstrap-reboot.css.map" />
     <Content Include="Content\Bootstrap\bootstrap-grid.min.css.map" />
     <Content Include="Content\Bootstrap\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\Yarin21 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\yarinsweet - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
